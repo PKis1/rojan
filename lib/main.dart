@@ -43,7 +43,7 @@ class RojanApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: tr(state.lang, 'appName'),
         locale: localeFor(state.lang),
-        supportedLocales: const [Locale('ckb'), Locale('en'), Locale('ar')],
+        supportedLocales: const [Locale('en'), Locale('ar')],
         localizationsDelegates: const [
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
