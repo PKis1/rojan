@@ -41,7 +41,7 @@ class _StatsTabState extends State<StatsTab> {
         children: [
           Text(tr(l, 'statsTitle'),
               style: tt.headlineMedium?.copyWith(fontWeight: FontWeight.w800)),
-          const SizedBox(height: 8),
+          const SizedBox(height: 8.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,7 +65,7 @@ class _StatsTabState extends State<StatsTab> {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: SizedBox(
-                height: 110,
+                height: 110.0,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -102,13 +102,13 @@ class _Bar extends StatelessWidget {
       children: [
         Container(
           width: 22,
-          height: value == null ? 4 : (h < 4 ? 4 : h),
+          height: value == null ? 4.0 : (h < 4.0 ? 4.0 : h),
           decoration: BoxDecoration(
             color: value == null ? cs.outlineVariant : cs.primary,
             borderRadius: BorderRadius.circular(6),
           ),
         ),
-        const SizedBox(height: 6),
+        const SizedBox(height: 6.0),
         Text(label, style: Theme.of(context).textTheme.labelSmall),
       ],
     );
@@ -153,7 +153,7 @@ class MonthReport extends StatelessWidget {
           child: Column(
             children: [
               Icon(icon, color: cs.primary),
-              const SizedBox(height: 4),
+              const SizedBox(height: 4.0),
               Text(value,
                   style: tt.titleLarge?.copyWith(fontWeight: FontWeight.w800)),
               Text(title,
@@ -170,7 +170,7 @@ class MonthReport extends StatelessWidget {
           children: [
             SizedBox(
               width: 120,
-              height: 120,
+              height: 120.0,
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -193,7 +193,7 @@ class MonthReport extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 20.0),
             Row(
               children: [
                 tile(Icons.list_alt, tr(lang, 'tasksTotal'), '${stats.total}'),
@@ -205,7 +205,7 @@ class MonthReport extends StatelessWidget {
                     tr(lang, 'streak'), '${stats.streak}'),
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 20.0),
             Text(tr(lang, evalKey),
                 textAlign: TextAlign.center,
                 style: tt.bodyLarge?.copyWith(height: 1.6)),
