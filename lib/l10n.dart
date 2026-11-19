@@ -6,7 +6,7 @@ const supportedLangs = ['ku', 'en', 'ar'];
 const langNames = {'ku': 'کوردی', 'en': 'English', 'ar': 'العربية'};
 
 Locale localeFor(String lang) =>
-    lang == 'ku' ? const Locale('ckb') : Locale(lang);
+    lang == 'en' ? const Locale('en') : const Locale('ar');
 
 /// Translate [key] into [lang]. Use `{n}` style placeholders via [args].
 String tr(String lang, String key, [Map<String, String> args = const {}]) {
