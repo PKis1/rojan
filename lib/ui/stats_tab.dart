@@ -96,7 +96,7 @@ class _Bar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final h = 70 * (value ?? 0);
+    final double h = 70.0 * (value ?? 0.0);
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
