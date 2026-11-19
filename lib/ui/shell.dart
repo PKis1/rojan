@@ -71,27 +71,95 @@ class _ShellState extends State<Shell> {
     ];
     return Scaffold(
       body: IndexedStack(index: _index, children: tabs),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() => _index = i),
-        destinations: [
-          NavigationDestination(
-              icon: const Icon(Icons.today_outlined),
-              selectedIcon: const Icon(Icons.today),
-              label: tr(l, 'tabToday')),
-          NavigationDestination(
-              icon: const Icon(Icons.edit_calendar_outlined),
-              selectedIcon: const Icon(Icons.edit_calendar),
-              label: tr(l, 'tabPlan')),
-          NavigationDestination(
-              icon: const Icon(Icons.insights_outlined),
-              selectedIcon: const Icon(Icons.insights),
-              label: tr(l, 'tabStats')),
-          NavigationDestination(
-              icon: const Icon(Icons.settings_outlined),
-              selectedIcon: const Icon(Icons.settings),
-              label: tr(l, 'tabSettings')),
+      bottomNavigationBar: _BottomBar(
+        index: _index,
+        onTap: (i) => setState(() => _index = i),
+        items: [
+          _NavItem(Icons.today_outlined, Icons.today, tr(l, 'tabToday')),
+          _NavItem(Icons.edit_calendar_outlined, Icons.edit_calendar,
+              tr(l, 'tabPlan')),
+          _NavItem(Icons.insights_outlined, Icons.insights, tr(l, 'tabStats')),
+          _NavItem(Icons.settings_outlined, Icons.settings,
+              tr(l, 'tabSettings')),
         ],
+      ),
+    );
+  }
+}
+
+class _NavItem {
+  final IconData icon;
+  final IconData selectedIcon;
+  final String label;
+  const _NavItem(this.icon, this.selectedIcon, this.label);
+}
+
+/// Simple custom bottom bar (does not depend on Material localizations).
+class _BottomBar extends StatelessWidget {
+  final int index;
+  final ValueChanged<int> onTap;
+  final List<_NavItem> items;
+  const _BottomBar({
+    required this.index,
+    required this.onTap,
+    required this.items,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return Material(
+      color: cs.surfaceContainer,
+      child: SafeArea(
+        top: false,
+        child: SizedBox(
+          height: 72,
+          child: Row(
+            children: [
+              for (var i = 0; i < items.length; i++)
+                Expanded(
+                  child: InkWell(
+                    onTap: () => onTap(i),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 64,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            color: i == index
+                                ? cs.secondaryContainer
+                                : Colors.transparent,
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Icon(
+                            i == index ? items[i].selectedIcon : items[i].icon,
+                            color: i == index
+                                ? cs.onSecondaryContainer
+                                : cs.onSurfaceVariant,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          items[i].label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight:
+                                i == index ? FontWeight.w700 : FontWeight.w400,
+                            color: i == index
+                                ? cs.onSurface
+                                : cs.onSurfaceVariant,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
       ),
     );
   }

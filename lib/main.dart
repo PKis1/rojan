@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app_state.dart';
 import 'l10n.dart';
@@ -19,15 +20,20 @@ class RojanApp extends StatelessWidget {
   final AppState state;
   const RojanApp({super.key, required this.state});
 
-  ThemeData _theme(Brightness b) => ThemeData(
-        useMaterial3: true,
-        brightness: b,
-        colorSchemeSeed: const Color(0xFF4F46E5),
-        cardTheme: CardThemeData(
-          elevation: 0,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        ),
-      );
+  ThemeData _theme(Brightness b) {
+    final base = ThemeData(
+      useMaterial3: true,
+      brightness: b,
+      colorSchemeSeed: const Color(0xFF4F46E5),
+      cardTheme: CardThemeData(
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
+    );
+    return base.copyWith(
+      textTheme: GoogleFonts.notoSansArabicTextTheme(base.textTheme),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +50,7 @@ class RojanApp extends StatelessWidget {
         ],
         theme: _theme(Brightness.light),
         darkTheme: _theme(Brightness.dark),
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         home: state.onboarded
             ? Shell(state: state)
             : OnboardingScreen(state: state),

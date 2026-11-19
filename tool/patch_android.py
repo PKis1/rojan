@@ -18,7 +18,8 @@ if not manifest.exists():
 # ------------------------------------------------------------ manifest
 m = manifest.read_text(encoding="utf-8")
 
-perms = """    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+perms = """    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
 """
